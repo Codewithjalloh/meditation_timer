@@ -5,13 +5,9 @@ class TimerModel extends ChangeNotifier {
   int minutes = 5;
   int seconds = 0;
   bool isRunning = false;
-  late AudioPlayer audioPlayer;
-  late AudioCache audioCache;
+  AudioPlayer audioPlayer;
 
-  TimerModel() {
-    audioPlayer = AudioPlayer();
-    audioCache = AudioCache(fixedPlayer: audioPlayer);
-  }
+  TimerModel() : audioPlayer = AudioPlayer();
 
   void startTimer() {
     if (isRunning) return;
@@ -42,7 +38,8 @@ class TimerModel extends ChangeNotifier {
     }
   }
 
-  void playSound() {
-    audioCache.play('meditation_bell.mp3');
+  void playSound() async {
+    await audioPlayer.setSource(AssetSource('assets/meditation_bell.mp3'));
+    await audioPlayer.resume();
   }
 }
