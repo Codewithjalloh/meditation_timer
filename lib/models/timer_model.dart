@@ -39,7 +39,6 @@ class TimerModel extends ChangeNotifier {
   }
 
   void playSound() async {
-    await audioPlayer.setSource(AssetSource('assets/meditation_bell.mp3'));
-    await audioPlayer.resume();
+    await audioPlayer.play('assets/meditation_bell.mp3');
   }
 }
